@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS Moduls (
     CodiModul INT,
     NomModul VARCHAR(100) NOT NULL,
     constraint PK_Moduls primary key (codiModul),
-    constraint FK_Aules FOREIGN KEY (NumeroAula) REFERENCES TO Aules(NumeroAula)
+    constraint FK_Aules FOREIGN KEY (NumeroAula) REFERENCES TO Aules (NumeroAula)
 );
 
 /*TAULA DE LES ASSIGNATURES*/
@@ -41,25 +41,27 @@ CREATE TABLE IF NOT EXISTS Persona(
     Cognom2 VARCHAR(50),
     Adreca VARCHAR(100),
     Telefon VARCHAR(15),
-    constraint PK_Persona primary key (DNI)
+    constraint PK_Persona PRIMARY KEY (DNI),
+    constraint CK_nom check (nom = INITCAP(UPPER(nom)))
 );
 
 /*TAULA DELS PROFESSORS*/
 CREATE TABLE IF NOT EXISTS Professors (
+    DNI CHAR(9),
     Especialitat VARCHAR(50),
     Assignatures varchar(30),
-    constraint PK_Professors primary key Persona (DNI),
+    constraint PK_Professors primary key (DNI),
     constraint FK_Professors FOREIGN key (DNI) REFERENCES Persona(DNI),
-    constraint CK_nom check (nom = INITCAP(UPPER(nom)))
 );
 
 /*TAULA DELS ALUMNES*/
 CREATE TABLE IF NOT EXISTS Alumnes (
+    DNI CHAR(9),
     DataNaixement DATE,
     AssignaturesMatriculades varchar(30),
-    constraint PK_Alumnes PRIMARY KEY Persona (DNI),
-    constraint FK_Alumnes FOREIGN key (DNI) REFERENCES Persona(DNI),
-    constraint FK_Alunes_Reflexiva (DNI) REFERENCES Alumnes(PK_Alumnes)
+    constraint PK_Alumnes PRIMARY KEY (DNI),
+    constraint FK_Alumnes FOREIGN KEY (DNI) REFERENCES Persona(DNI),
+    constraint FK_Delegat FOREIGN KEY (DNI) REFERENCES Alumnes(DNI)
 );
 
 
