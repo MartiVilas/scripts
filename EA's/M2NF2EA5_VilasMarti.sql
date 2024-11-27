@@ -1,14 +1,18 @@
 /*CREAR LA DATABASE 'escola'*/
 CREATE DATABASE escola;
 
+
 /*CREAR L'USUARI 'escola'*/
 CREATE USER escola WITH SUPERUSER CREATEROLE ENCRYPTED PASSWORD 'escola';
+
 
 /*CANVIAR EL OWNER DE LA TAULA DE L'USUARI MEU A L'USUARI 'escola'*/
 ALTER DATABASE escola OWNER TO escola;
 
+
 /*DONAR PRIVILEGIS DE LA DATABASE 'escola' AL USUARI 'escola'*/
 GRANT ALL PRIVILEGES ON DATABASE escola TO escola;
+
 
 /*TAULA DE LES AULES*/
 CREATE TABLE IF NOT EXISTS Aules (
@@ -17,23 +21,26 @@ CREATE TABLE IF NOT EXISTS Aules (
     constraint PK_Aules primary key (NumeroAula)
 );
 
+
 /*TAULA DELS MODULS*/
 CREATE TABLE IF NOT EXISTS Moduls (
     CodiModul INT,
     NomModul VARCHAR(100) NOT NULL,
+    NumeroAula INT,
     constraint PK_Moduls primary key (codiModul),
-    constraint FK_Aules FOREIGN KEY (NumeroAula) REFERENCES TO Aules (NumeroAula)
+    constraint FK_Aules FOREIGN KEY (NumeroAula) REFERENCES Aules(NumeroAula)
 );
+
 
 /*TAULA DE LES ASSIGNATURES*/
 CREATE TABLE IF NOT EXISTS Assignatures (
     CodiAssignatura INT,
     NomAssignatura VARCHAR(100) NOT NULL,
-    constraint PK_Assignatres primary key (CodiAssignatura)
+    constraint PK_Assignatres primary key(CodiAssignatura)
 );
 
-/*TAULA PERSONA*/
 
+/*TAULA PERSONA*/
 CREATE TABLE IF NOT EXISTS Persona(
     DNI CHAR(9),
     Nom VARCHAR(50) NOT NULL,
@@ -46,22 +53,24 @@ CREATE TABLE IF NOT EXISTS Persona(
 );
 
 /*TAULA DELS PROFESSORS*/
-CREATE TABLE IF NOT EXISTS Professors (
+CREATE TABLE IF NOT EXISTS Professor (
     DNI CHAR(9),
     Especialitat VARCHAR(50),
     Assignatures varchar(30),
     constraint PK_Professors primary key (DNI),
-    constraint FK_Professors FOREIGN key (DNI) REFERENCES Persona(DNI),
+    constraint FK_Professors FOREIGN key (DNI) REFERENCES Persona(DNI)
 );
 
+
 /*TAULA DELS ALUMNES*/
-CREATE TABLE IF NOT EXISTS Alumnes (
-    DNI CHAR(9),
+CREATE TABLE IF NOT EXISTS Alumne (
+    DNI varchar(9),
+    DNIAlume varchar(9),
     DataNaixement DATE,
     AssignaturesMatriculades varchar(30),
     constraint PK_Alumnes PRIMARY KEY (DNI),
     constraint FK_Alumnes FOREIGN KEY (DNI) REFERENCES Persona(DNI),
-    constraint FK_Delegat FOREIGN KEY (DNI) REFERENCES Alumnes(DNI)
+    constraint FK_Delegat FOREIGN KEY (DNIAlume) REFERENCES Alumne(DNI)
 );
 
 
@@ -73,6 +82,7 @@ CREATE TABLE IF NOT EXISTS Modul_Assignatura (
     FOREIGN KEY (CodiModul) REFERENCES Moduls(CodiModul),
     FOREIGN KEY (CodiAssignatura) REFERENCES Assignatures(CodiAssignatura)
 );
+
 
 /*Taula de la relació de la taula de modul amb aula*/
 CREATE TABLE IF NOT EXISTS Modul_Aula (
@@ -89,26 +99,16 @@ CREATE TABLE IF NOT EXISTS Professor_Assignatura (
     DNIProfessor CHAR(9),
     CodiAssignatura INT,
     PRIMARY KEY (DNIProfessor, CodiAssignatura),
-    FOREIGN KEY (DNIProfessor) REFERENCES Professors(DNI),
+    FOREIGN KEY (DNIProfessor) REFERENCES Professor(DNI),
     FOREIGN KEY (CodiAssignatura) REFERENCES Assignatures(CodiAssignatura)
 );
+
 
 /*Taula de la relació entre almne i assignatura*/
 CREATE TABLE IF NOT EXISTS Alumne_Assignatura (
     DNIAlumne CHAR(9),
     CodiAssignatura INT,
     PRIMARY KEY (DNIAlumne, CodiAssignatura),
-    FOREIGN KEY (DNIAlumne) REFERENCES Alumnes(DNI),
+    FOREIGN KEY (DNIAlumne) REFERENCES Alumne(DNI),
     FOREIGN KEY (CodiAssignatura) REFERENCES Assignatures(CodiAssignatura)
 );
-
-/*Taula de la relació entre alumne y delegats*/
-CREATE TABLE IF NOT EXISTS Alumne_Delegats (
-    DNIAlumne CHAR(9),
-    CodiGrup INT,
-    PRIMARY KEY (DNIAlumne, CodiGrup),
-    FOREIGN KEY (DNIAlumne) REFERENCES Alumnes(DNI),
-    FOREIGN KEY (CodiGrup) REFERENCES Delegats(CodiGrup)
-);
-
-
