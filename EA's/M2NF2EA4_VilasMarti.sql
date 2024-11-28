@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS fitxa(
     TELEFON varchar(11) NOT NULL,
     PROVINCIA varchar(30),
     DATA_NAIX DATE DEFAULT CURRENT_DATE,
-    CONSTRAINT PK_dni PRIMARY KEY (DNI)
+    CONSTRAINT PK_fitxa PRIMARY KEY (DNI)
 );
 
 /*
@@ -60,7 +60,7 @@ comment on column fitxa.nom is 'Nom de la persona';
 
 comment on column fitxa.cognoms is 'Cognoms de la persona';
 
-comment on column fitxa.adreÇa is 'Adreça de la persona';
+comment on column fitxa.adreça is 'Adreça de la persona';
 
 COMMENT ON COLUMN fitxa.telefon is 'Telèfon de la persona';
 
