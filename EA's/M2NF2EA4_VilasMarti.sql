@@ -32,7 +32,10 @@ alter table fitxa add cp varchar(5);
 alter table fitxa rename column cp to Codi_Postal;
 
 /*e) Canviar el nom de la restricció anomendada PK_Fitxa. S’ha de dir PrimKey_Fitxa*/
-alter table fitxa rename constraint PK_dni to PrimaryKey_Fitxa;
+ALTER TABLE fitxa DROP CONSTRAINT PK_dni;
+
+ALTER TABLE fitxa ADD CONSTRAINT PrimaryKey_Fitxa PRIMARY KEY (dni);
+
 
 /*f) Modificar la longitud del tipus de dada del camp Codi_Postal. La nova longitud és VARCHAR(10).*/
 alter table fitxa alter column Codi_Postal type varchar(10); 
@@ -41,6 +44,7 @@ alter table fitxa alter column Codi_Postal set data type varchar(5);
 /*g) Modificar el tipus de dades del camp Codi_Postal. a El nou tipus de dades per aquest camp és
 NUMERIC(5). Si et salta l’error busca per internet com es podria fer.*/
 ALTER TABLE fitxa ALTER COLUMN Codi_Postal TYPE numeric(5);
+ALTER TABLE fitxaALTER COLUMN codi_postal TYPE NUMERIC USING codi_postal::NUMERIC;
 
 /*h) Afegeix una restricció amb el nom CK_Upper_Prov a la taula FITXA per verificar que els valors de
 camp Provincia estiguin en majúscules.*/
