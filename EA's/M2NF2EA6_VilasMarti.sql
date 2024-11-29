@@ -1,3 +1,5 @@
+/*Exercici 1*/
+
 /*Afegir un nou camp a la taula Fitxa, anomenat Equip de tipus INTEGER.*/
 alter table fitxa add column equip integer;
 
@@ -18,11 +20,23 @@ delete from fitxa;
 INSERT INTO fitxa (DNI, NOM, COGNOMS, ADREÇA, TELEFON, DATA_NAIX)  VALUES (3421232, 'LUIS MIGUEL', 'ACEDO GÓMEZ', 'GUZMÁN EL BUENO, 90', '969231256', '1970-05-05');
 INSERT INTO fitxa (DNI, NOM, COGNOMS, ADREÇA, TELEFON, PROVINCIA, DATA_NAIX) VALUES (4864868, 'BEATRIZ', 'SANCHO MANRIQUE', 'ZURRIAGA, 25', '932321212', 'BCN', '1978-07-06');
 
+/* Exercici 2 */
+BEGIN;
+
 /*Inserir els següents registres a la taula fes un ROLLBACK i comprovar si encara existeixen.*/
+INSERT INTO fitxa (DNI, NOM, COGNOMS, ADREÇA, TELEFON, equip, PROVINCIA, DATA_NAIX)  VALUES (7868544, 'JONÁS', 'ALMENDROS RODRIGUEZ', 'FEDERICO PUERTAS, 3', '915478947', 3, 'MADRID', '1987-01-01');
+INSERT INTO fitxa (DNI, NOM, COGNOMS, ADREÇA, TELEFON, equip, PROVINCIA, DATA_NAIX)  VALUES (8324216, 'PEDRO', 'MARTIN HUIGERO', 'VIRGEN DEL CERRO, 154', '961522344', 5, 'SORIA', '1978-04-29');
+
+ROLLBACK;
 
 /*Inserir els següents registres a la taula programant les transaccions indicades.*/
+INSERT INTO fitxa (DNI, NOM, COGNOMS, ADREÇA, TELEFON, equip, PROVINCIA, DATA_NAIX)  VALUES (14948992,'SANDRA','MARTÍN GONZALEZ','PABLO NERUDA, 15', '916581515',6,'MADRID','1970-05-05');
 
 /*Desar el canvis permanentment.*/
+COMMIT;
+
+/*introduir el registre*/
+INSERT INTO fitxa (DNI, NOM, COGNOMS, ADREÇA, TELEFON, equip, PROVINCIA, DATA_NAIX)  VALUES (15756214,'MIGUEL','CAMARGO ROMAN','ARMADORES, 1', '949488588', 7, NULL,'1985-12-12');
 
 /*Posar una marca anomenada intA.*/
 
