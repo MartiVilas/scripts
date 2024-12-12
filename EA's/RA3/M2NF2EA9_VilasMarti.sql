@@ -23,3 +23,6 @@ select manager_id, count(employee_id), avg(salary) from employees  group by mana
 
 /*8. Mostra l’id del departament i el número d’empleats dels departaments amb més de 4 empleats.*/
 select department_id, count(employee_id) from employees group by department_id having count(employee_id)>4;
+
+
+
