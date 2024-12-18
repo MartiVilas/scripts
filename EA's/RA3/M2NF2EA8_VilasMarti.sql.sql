@@ -56,4 +56,4 @@ where last_name like '%a%' and last_name like '%e%';
 select last_name, salary
 from employees
 where job_id = 'AD_ASST' or job_id = 'AC_ACCOUNT'
-and salary !=2500 and salary!=3500 and salary !=7000;
+and salary != 2500 and salary != 3500 and salary != 7000;
