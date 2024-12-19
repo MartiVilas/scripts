@@ -22,10 +22,9 @@ where d.location_id = l.location_id and l.city ilike'seattle';
 
 --Exercici 5
 select e.manager_id , sum(e.salary)
-from employees e, employees m
-where e.manager_id = m.employee_id
+from employees e
 group by e.manager_id
-having avg(e.salary) > 50000;
+having avg(e.salary) > 5000;
 
 --Exercici 6
 select count(e.employee_id), max(e.salary)
