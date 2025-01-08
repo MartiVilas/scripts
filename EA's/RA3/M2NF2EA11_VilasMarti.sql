@@ -24,7 +24,7 @@ where d.location_id = l.location_id and l.city ilike'seattle';
 select e.manager_id , sum(e.salary)
 from employees e
 group by e.manager_id
-having avg(e.salary) > 5000;
+having sum(e.salary) > 50000;
 
 --Exercici 6
 select count(e.employee_id), max(e.salary)
@@ -40,7 +40,7 @@ where e.employee_id = m.manager_id
 having count(m.employee_id)>6;
 
 
---Exercici 7
+--Exercici 8
 select count(e.employee_id), max(e.salary)
 from employees e, employees m
 where e.employee_id = m.manager_id and e.manager_id='100' or e.manager_id='121' or e.manager_id='122'
