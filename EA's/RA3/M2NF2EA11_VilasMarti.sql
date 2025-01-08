@@ -25,11 +25,8 @@ group by l.city;
 select e.manager_id , sum(e.salary)
 from employees e
 group by e.manager_id
-<<<<<<< HEAD
-having sum(e.salary) > 50000;
-=======
 having sum(e.salary) > 15000;
->>>>>>> 6b771050d65d5dc21fbdf83a471be8af80c819f5
+
 
 --Exercici 6
 select count(e.employee_id), max(e.salary)
