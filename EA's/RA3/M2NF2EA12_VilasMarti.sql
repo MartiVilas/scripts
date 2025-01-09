@@ -38,3 +38,12 @@ join employees m on e.department_id = m.department_id
 join departments d on e.department_id = d.department_id
 where m.employee_id = '120';
 
+<<<<<<< HEAD
+=======
+select distinct (e.last_name), m.hire_date
+from employees e join employees m on (e.hire_date>m.hire_date) and e.last_name ilike 'davies';
+
+
+--Exercici 4
+
+>>>>>>> a25c65e (chagnes)
