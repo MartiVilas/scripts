@@ -36,12 +36,3 @@ JOIN employees m ON e.department_id = m.department_id
 WHERE e.last_name != m.last_name
 ORDER BY e.last_name;
 
-<<<<<<< HEAD
-=======
-select distinct (e.last_name), m.hire_date
-from employees e join employees m on (e.hire_date>m.hire_date) and e.last_name ilike 'davies';
-
-
---Exercici 4
-
->>>>>>> a25c65e (chagnes)
