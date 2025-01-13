@@ -8,3 +8,7 @@ from repventas v left join oficinas o on v.oficina_rep = o.oficina;
 
 
 --Exercici 3
+SELECT v.nombre, j.nombre AS "Cap", o.ciudad, o.dir AS "Director"
+FROM repventas v
+LEFT JOIN repventas j ON v.oficina_rep = j.oficina_rep
+LEFT JOIN oficinas o ON v.oficina_rep = o.oficina;
