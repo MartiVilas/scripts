@@ -17,9 +17,9 @@ from locations l join departments d on l.location_id = d.location_id
 where l.location_id='1400';
 
 --Exercici 3
-select e.last_name, e.hire_date
-from employees e
-join employees m on m.last_name ilike 'davies' and e.hire_date > m.hire_date;
+select distinct (e.last_name), m.hire_date
+from employees e join employees m on (e.hire_date>m.hire_date) and e.last_name ilike 'davies';
+
 
 --Exercici 4
 select e.first_name,e.last_name, d.department_name, l.city
