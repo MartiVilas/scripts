@@ -101,4 +101,8 @@ select c.*
 from clientes c
 where 10000 > any (select count(p.num_pedido) from pedidos p where p.clie = c.num_clie);
 
-
+--Ex5
+select p.clie, count(*)
+from pedidos p
+group by p.clie
+having count(p.num_pedido) in (select max(c) from (select count(*) as c from pedidos group by clie) as a);
