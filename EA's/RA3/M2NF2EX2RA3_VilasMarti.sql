@@ -4,7 +4,6 @@ He solucionat casi tots els errors de l'examen a paper al datagrip, menys la úl
 */
 
 
-
 --Ex1 (funciona amb el canvi de solucionar el problema de les funcions al where)
 select r.nombre
 from repventas r join pedidos p on r.num_empl = p.rep
@@ -48,10 +47,10 @@ Quan ho he fet a paper no he he sapigut verue, al dataGrip ho he vist al instant
 */
 select *
 from pedidos p
-where clie in (select c.num_clie
               from clientes c
               where rep_clie = (select num_empl
                                 from repventas
+where clie in (select c.num_clie
                                 where nombre ilike 'Sue%'));
 
 
