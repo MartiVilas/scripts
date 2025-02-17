@@ -1,6 +1,3 @@
-/*DIA 13/02/2025*/
-
-
 --Ex1 subconuslta relacionada
 /*Sense correlacionada*/
 select r.*
@@ -44,3 +41,12 @@ select p.clie, count(*)
 from pedidos p
 group by p.clie
 having count(p.num_pedido) in (select max(c) from (select count(*) as c from pedidos group by clie) as a);
+
+
+--Ex6
+select r.nombre,
+       (select count(p.num_pedido) from pedidos p where p.rep = r.num_empl) as comandes
+from repventas r
+where 5 < (select count(p.num_pedido)
+           from pedidos p
+           where p.rep = r.num_empl);
