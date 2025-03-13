@@ -1,4 +1,63 @@
 /*
+Exercici 1: Realitzar un programa que contingui una funció que dupliqui la quantitat rebuda com a
+paràmetre. La funció rebrà el nom de FUNC_DUPLICAR_QUANTITAT. S’ha de programar un bloc
+principal que demani per teclat la quantitat i que cridi a la funció FUNC_DUPLICAR_QUANTITAT
+passant el paràmetre corresponent.
+*/
+
+create or replace function FUNC_DUPLICAR_QUANTITAT(param_cuantitat integer) returns integer as $$
+    declare
+        var_quantitat integer:= $1;
+        var_total integer;
+    begin
+        var_total:= var_quantitat*2;
+        return var_total;
+    end;
+$$language plpgsql;
+
+
+do $$
+declare
+    var_param_a_pasar integer :=:v_num;
+    var_function integer := (select FUNC_DUPLICAR_QUANTITAT(var_param_a_pasar));
+begin
+    raise notice 'El numero % duplicat dona %',var_param_a_pasar,var_function;
+end;
+$$language plpgsql;
+
+
+
+/*
+Exercici 2. Realitzar un programa que contingui una funció que calculi el factorial d’un número que
+es passa com a paràmetre. La funció rebrà el nom de FUNC_FACTORIAL. S’ha de programar un
+bloc principal que pregunti a l’usuari pel número a calcular i cridi a la funció FUNC_FACTORIAL,
+passant el paràmetre corresponent.
+*/
+
+CREATE OR REPLACE FUNCTION FUNC_FACTORIAL(para_num_factorial integer) returns integer as
+$$
+declare
+    var_factorial integer:= 1;
+begin
+    for i in 1..$1 loop
+        var_factorial := var_factorial*i;
+    end loop;
+    return var_factorial;
+end;
+
+$$ language plpgsql;
+
+do $$
+    declare
+        var_param_factorial integer :=: v_param;
+        var_factorial integer := (select FUNC_FACTORIAL(var_param_factorial));
+    begin
+        raise notice 'El factorial de % es %',var_param_factorial,var_factorial;
+    end;
+$$language plpgsql;
+
+
+/*
 Exercici 3. Realitzar un programa que contingui un procediment anomenat PROC_ALTA_JOB que doni
 d’alta un nou ofici (JOB) a la taula jobs. Totes les dades del nou ofici s’han de passat com com a
 paràmetre. S’ha de programar un bloc principal que pregunti a l’usuari totes les dades del nou ofici i cridi
@@ -6,7 +65,6 @@ el procediment PROC_ALTA_JOB. Abans d’inserir s’ha de comprovar que el valor
 salari no sigui negatiu i a més, que el salari mínim sigui més petit que el salari màxim. Mostra els
 missatges d’error corresponents.
 */
-
 
 CREATE OR REPLACE FUNCTION FUNC_COMPROBAR_POSITIU (jobs.min_salary%type) returns boolean as $$
     declare
