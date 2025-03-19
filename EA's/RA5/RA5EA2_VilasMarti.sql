@@ -15,7 +15,7 @@ Prova el procediment escrivint per pantalla 'Italy'..
 */
 
 create type loc_pais_type AS
-(
+(   
     vr_nom_pais varchar(25),
     vr_num_loc  numeric
 );
