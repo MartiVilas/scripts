@@ -69,10 +69,22 @@ create type dades_empl as (
     var_department_name varchar,
     var_loc_id numeric);
 
-create or replace procedure proc_dades_empl () as $$
+create or replace procedure proc_dades_empl (param_employee_id employees.employee_id%type) as $$
 declare
-
+    var_empleat dades_empl;
 begin
-
+    select e.first_name,e.last_name,d.department_name,d.location_id
+    into var_empleat
+    from employees e, departments d
+    where e.department_id = d.department_id and e.employee_id = $1;
+    raise notice'%',var_empleat;
 end;
-    $$ language plpgsql;
+$$ language plpgsql;
+
+do $$
+    declare
+        var_department_id employees.employee_id%type :=: vId;
+    begin
+        call proc_dades_empl(var_department_id);
+    end;
+$$ language plpgsql;
