@@ -58,3 +58,14 @@ DO $$
 $$ LANGUAGE plpgsql;
 
 SELECT * FROM jobs;
+
+
+
+/*
+Exercici 4 - Realitzar un programa que contingui una funció que retorni quants empleats hi ha a un departament. 
+L'id del departament es passarà com a paràmetre de la funció. 
+La funció s’anomenarà func_num_emp i es cridarà des d’un bloc anònim  o principal. 
+El paràmetre que se li passa a la funció se li preguntarà a l’usuari i per tant, s’ha d’introduir per teclat.
+*/
+
+
