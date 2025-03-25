@@ -59,7 +59,7 @@ do $$
 $$ language plpgsql;
 
 
--- Ex3
+
 
 --Ex3
 
