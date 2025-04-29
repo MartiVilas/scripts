@@ -23,7 +23,6 @@ $$ language plpgsql;
 
 --Exercici 2
 
-
 create type info_reactiu_type as(
     nom_reactiu varchar(20),
     preu_reactiu numeric(8,2),
@@ -33,10 +32,21 @@ create type info_reactiu_type as(
 
 create or replace function func_reactiu_info(reactiu.codi_reac%type) returns info_reactiu_type as $$
     declare
-        
+        var_nou_info info_reactiu_type;
     begin
-
-
+        select r.nom, r.preu, r.cif_prov, p.telefon
+        into var_nou_info.nom_reactiu,var_nou_info.preu_reactiu, var_nou_info.cif_prov,var_nou_info.telefon_prov
+        from reactiu r join public.proveidor p on r.cif_prov = p.cif
+        where codi_reac = $1;
+        return var_nou_info;
     end;
 $$language plpgsql;
 
+do $$
+    declare
+        var_id_react reactiu.codi_reac%type:=: v_id;
+        var_func_reactiu info_reactiu_type:= (select func_reactiu_info(var_id_react));
+    begin
+        raise notice '%',var_func_reactiu;
+    end;
+$$ language plpgsql;

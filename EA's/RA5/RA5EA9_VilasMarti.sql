@@ -97,5 +97,10 @@ BEGIN
     EXCEPTION
         WHEN others THEN
             RAISE NOTICE 'Error: %, SQLSTATE: %', SQLERRM, SQLSTATE;
+<<<<<<< HEAD
     END;
 END $$;
+=======
+    END;
+END $$;
+>>>>>>> e8ce4a9dd2509fcae3caf67f0ad037a5bfd2c7b6
